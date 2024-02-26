@@ -54,14 +54,24 @@
                                                 <small class="btn border-2 border-danger py-1 px-4 fw-bold fst-italic">{{ $usulan->status_usulan }}</small> <br />
                                                 <small>
                                                     Alasan ditolak: <b>{{ $usulan->alasan_usulan_ditolak }}</b>
-                                                </small>
+                                                </small><br />
+                                                @if ( $usulan->dokumen_tambahan_usulan )
+                                                    <small>
+                                                        Dokumen tambahan penolakan : <b><a href="{{ asset('assets/storage/files/dokumen-submission/'.$usulan->dokumen_tambahan_usulan) }}" target="__blank">Lihat dokumen</a></b>
+                                                    </small>
+                                                @endif
                                             @elseif( $usulan->status_usulan == 'Approved' ) <small class="btn border-2 border-success py-1 px-4 fw-bold fst-italic">{{ $usulan->status_usulan }}</small>
                                             @else
                                                 <small class="btn border-2 border-warning py-1 px-4 fw-bold fst-italic">{{ $usulan->status_usulan }}</small> <br />
                                                 @if( $usulan->status_usulan == 'Returned by Admin' || $usulan->status_usulan == 'Returned by Prodi' )
                                                     <small>
                                                         Alasan dikembalikan: <b>{{ $usulan->alasan_usulan_ditolak }}</b>
-                                                    </small>
+                                                    </small><br />
+                                                    @if ( $usulan->dokumen_tambahan_usulan )
+                                                        <small>
+                                                            Dokumen tambahan pengembalian : <b><a href="{{ asset('assets/storage/files/dokumen-submission/'.$usulan->dokumen_tambahan_usulan) }}" target="__blank">Lihat dokumen</a></b>
+                                                        </small>
+                                                    @endif
                                                 @endif
                                             @endif
                                         </td>

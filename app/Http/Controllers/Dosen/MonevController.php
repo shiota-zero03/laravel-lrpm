@@ -44,7 +44,7 @@ class MonevController extends Controller
         $laporanAkhir = $check_code->ppt_laporan;
         if($request->file('ppt_monev')){
             $laporanAkhir = time().'_'.$request->file('ppt_monev')->getClientOriginalName();
-            $request->file('ppt_monev')->move(public_path().'assets/storage/files/ppt-monev/', $laporanAkhir);
+            $request->file('ppt_monev')->move(public_path().'/assets/storage/files/ppt-monev/', $laporanAkhir);
         }
         $data = [
             'ppt_laporan' => $laporanAkhir,

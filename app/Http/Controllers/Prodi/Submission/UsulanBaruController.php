@@ -46,7 +46,7 @@ class UsulanBaruController extends Controller
         if($request->file('dokumen_tambahan_usulan')){
             $file = $request->file('dokumen_tambahan_usulan');
             $namafile = time().'_'.$file->getClientOriginalName();
-            $file->move(public_path().'assets/storage/files/dokumen-submission/', $namafile);
+            $file->move(public_path().'/assets/storage/files/dokumen-submission/', $namafile);
         } else {
             $namafile = null;
         }
@@ -75,7 +75,7 @@ class UsulanBaruController extends Controller
                 'status_progress' => 'rejected'
             ]);
             $update = $check_code->update([
-                'dokumen_tambahan_usulan' => $namafile,
+                'dokumen_tambahan_usulan' => $namafile ? $namafile : null,
                 'alasan_usulan_ditolak' => $request->alasan,
                 'status_akhir' => 'Rejected',
                 'status_usulan' => 'Rejected by Prodi',
@@ -107,7 +107,7 @@ class UsulanBaruController extends Controller
                 'status_progress' => 'revised'
             ]);
             $update = $check_code->update([
-                'dokumen_tambahan_usulan' => $namafile,
+                'dokumen_tambahan_usulan' => $namafile ? $namafile : null,
                 'status_usulan' => 'Returned by Prodi',
                 'alasan_usulan_ditolak' => $request->alasan,
             ]);
@@ -142,7 +142,7 @@ class UsulanBaruController extends Controller
                 'status_usulan' => 'Approved',
                 'waktu_proposal' => now(),
                 'status_proposal' => 'Pending by Dosen',
-                'dokumen_tambahan_usulan' => $namafile,
+                'dokumen_tambahan_usulan' => $namafile ? $namafile : null,
             ]);
             if($update) return response()->json(['message' =>'Data berhasil disetujui'], 200);
             return response()->json(['message' => 'server error'], 500);

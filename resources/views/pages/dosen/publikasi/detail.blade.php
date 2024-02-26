@@ -22,32 +22,32 @@
                                 <tbody>
                                     <tr>
                                         <th>Nama</th>
-                                        <td>:&nbsp; {{ $user->name }}</td>
+                                        <td>:&nbsp; {{ auth()->user()->name }}</td>
                                         <th>NIDN</th>
-                                        <td>:&nbsp; {{ $user->nidn }}</td>
+                                        <td>:&nbsp; {{ auth()->user()->nidn }}</td>
                                     </tr>
                                     <tr>
                                         <th>Jabatan</th>
-                                        <td>:&nbsp; {{ \App\Models\Position::find($user->jabatan)->nama_jabatan }}</td>
+                                        <td>:&nbsp; {{ \App\Models\Position::find(auth()->user()->jabatan)->nama_jabatan }}</td>
                                         <th>Email</th>
-                                        <td>:&nbsp; {{ $user->email }}</td>
+                                        <td>:&nbsp; {{ auth()->user()->email }}</td>
                                     </tr>
                                         <th>Nomor Hp</th>
-                                        <td>:&nbsp; {{ $user->no_hp }}</td>
+                                        <td>:&nbsp; {{ auth()->user()->no_hp }}</td>
                                         <th>ID Sinta</th>
-                                        <td>:&nbsp; {{ $user->id_sinta }}</td>
+                                        <td>:&nbsp; {{ auth()->user()->id_sinta }}</td>
                                     </tr>
                                     <tr>
                                         <th>ID Google Scholar</th>
-                                        <td>:&nbsp; {{ $user->id_google_scholar }}</td>
+                                        <td>:&nbsp; {{ auth()->user()->id_google_scholar }}</td>
                                         <th>ID Scopus</th>
-                                        <td>:&nbsp; {{ $user->id_scopus }}</td>
+                                        <td>:&nbsp; {{ auth()->user()->id_scopus }}</td>
                                     </tr>
                                     <tr>
                                         <th>Fakultas</th>
-                                        <td>:&nbsp; {{ \App\Models\Faculty::find($user->fakultas)->nama_fakultas }}</td>
+                                        <td>:&nbsp; {{ \App\Models\Faculty::find(auth()->user()->fakultas)->nama_fakultas }}</td>
                                         <th>Program Studi</th>
-                                        <td>:&nbsp; {{ \App\Models\Department::find($user->prodi)->nama_prodi }}</td>
+                                        <td>:&nbsp; {{ \App\Models\Department::find(auth()->user()->prodi)->nama_prodi }}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -190,37 +190,7 @@
                                 </a>
                             </div>
                         </div>
-                        <h6 class="card-title my-0">8. Laporan Akhir :</h6>
-                        <div class="row">
-                            <div class="col-12 mb-2">
-                                <label for="download-usulan" class="fw-bold mb-1">Download Laporan Akhir :</label><br />
-                                @if(!$check_code->laporan_akhir)
-                                    <a class="btn btn-secondary w-100" id="download-usulan">
-                                        <small><em>Belum ada dokumen laporan akhir</em></small>
-                                    </a>
-                                @else
-                                    <a href="{{ asset('assets/storage/files/laporan-akhir/'.$check_code->laporan_akhir) }}" class="btn btn-success w-100" id="download-usulan">
-                                        <i class="bi bi-cloud-arrow-down-fill me-2"></i>Download Laporan Akhir
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                        <h6 class="card-title my-0">9. PPT Laporan :</h6>
-                        <div class="row">
-                            <div class="col-12 mb-2">
-                                <label for="download-usulan" class="fw-bold mb-1">Download PPT Laporan :</label><br />
-                                @if(!$check_code->ppt_laporan)
-                                    <a class="btn btn-secondary w-100" id="download-ppt">
-                                        <small><em>Belum ada dokumen ppt</em></small>
-                                    </a>
-                                @else
-                                    <a href="{{ asset('assets/storage/files/ppt-laporan/'.$check_code->ppt_laporan) }}" class="btn btn-success w-100" id="download-usulan">
-                                        <i class="bi bi-cloud-arrow-down-fill me-2"></i>Download PPT Laporan
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                        <h6 class="card-title my-0">10. SPK :</h6>
+                        <h6 class="card-title my-0">8. SPK :</h6>
                         <div class="row">
                             <div class="col-12 mb-2">
                                 <label for="download-usulan" class="fw-bold mb-1">Download SPK :</label><br />
@@ -235,11 +205,56 @@
                                 @endif
                             </div>
                         </div>
-                        <h6 class="card-title my-0">11. Detail Publikasi :</h6>
+                        <h6 class="card-title my-0">9. Laporan Akhir :</h6>
+                        <div class="row">
+                            <div class="col-12 mb-2">
+                                <label for="download-usulan" class="fw-bold mb-1">Download Laporan Akhir :</label><br />
+                                @if(!$check_code->laporan_akhir)
+                                    <a class="btn btn-secondary w-100" id="download-usulan">
+                                        <small><em>Belum ada dokumen laporan akhir</em></small>
+                                    </a>
+                                @else
+                                    <a href="{{ asset('assets/storage/files/laporan-akhir/'.$check_code->laporan_akhir) }}" class="btn btn-success w-100" id="download-usulan">
+                                        <i class="bi bi-cloud-arrow-down-fill me-2"></i>Download Laporan Akhir
+                                    </a>
+                                @endif
+                            </div>
+                        </div>
+                        <h6 class="card-title my-0">10. Penilaian laporan akhir :</h6>
+                        <a target="__blank" href="{{ route('penilaian.submission', $check_code->id) }}" class="btn btn-primary btn-sm w-100 mb-3">Lihat penilaian laporan akhir</a>
+                        <h6 class="card-title my-0">11. PPT Monev :</h6>
+                        <div class="row">
+                            <div class="col-12 mb-2">
+                                <label for="download-usulan" class="fw-bold mb-1">Download PPT Monev :</label><br />
+                                @if(!$check_code->ppt_laporan)
+                                    <a class="btn btn-secondary w-100" id="download-usulan">
+                                        <small><em>Belum ada dokumen PPT Monev</em></small>
+                                    </a>
+                                @else
+                                    <a href="{{ asset('assets/storage/files/ppt-monev/'.$check_code->ppt_laporan) }}" class="btn btn-success w-100" id="download-usulan">
+                                        <i class="bi bi-cloud-arrow-down-fill me-2"></i>Download PPT Monev
+                                    </a>
+                                @endif
+                            </div>
+                        </div>
+                        <h6 class="card-title my-0">12. Penilaian Monev :</h6>
+                        <div class="row">
+                            <div class="col-12 mb-2">
+                                <label for="komentar" class="fw-bold">Komentar Reviewer :</label>
+                                <div class="form-control">{{ $check_code->komentar_reviewer }}</div>
+                            </div>
+                        </div>
+                        <h6 class="card-title my-0">13. Penilaian laporan final :</h6>
+                        <a target="__blank" href="{{ route('penilaian.final.submission', $check_code->id) }}" class="btn btn-primary btn-sm w-100 mb-3">Lihat penilaian laporan final</a>
+                        <h6 class="card-title my-0">14. Detail Publikasi :</h6>
                         <div class="row">
                             <div class="mb-2 form-group col-md-6">
                                 <label for="luaran_publikasi" class="fw-bold mb-1">Target Luaran</label>
                                 <input type="text" readonly value="{{ $check_code->luaran_publikasi }}" class="w-100 form-control" readonly>
+                            </div>
+                            <div class="mb-2 form-group col-md-6">
+                                <label for="nama_jurnal" class="fw-bold mb-1">Judul Publikasi</label>
+                                <input type="text" readonly value="{{ $check_code->judul_publikasi }}" class="w-100 form-control" readonly>
                             </div>
                             <div class="mb-2 form-group col-md-6">
                                 <label for="nama_jurnal" class="fw-bold mb-1">Nama Jurnal</label>
@@ -249,15 +264,73 @@
                                 <label for="link_jurnal" class="fw-bold mb-1">Link Jurnal</label>
                                 <input type="text" readonly value="{{ $check_code->link_jurnal }}" class="w-100 form-control" readonly>
                             </div>
-                            <div class="mb-2 form-group col-md-6">
-                                <label for="status_publikasi_jurnal" class="fw-bold mb-1">Status Jurnal</label>
-                                <input type="text" readonly value="{{ $check_code->status_publikasi_jurnal }}" class="w-100 form-control" readonly>
-                            </div>
-                            <div class="mb-2 form-group col-12">
-                                <label for="draft_artikel" class="fw-bold mb-1">Draft Artikel</label>
-                                <div class="form-control">
-                                    {{ $check_code->draft_artikel ? $check_code->draft_artikel : 'Belum ada draft' }}
-                                </div>
+                            <div class="col-12">
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Status</th>
+                                            <th>Dokumen View</th>
+                                            <th>Tanggal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Submit</td>
+                                            <td>
+                                                @if($check_code->dokumen_submit)
+                                                    <a target="__blank" class="btn btn-primary" href="{{ asset('assets/storage/files/publikasi/submit/'.$check_code->dokumen_submit) }}">Lihat Dokumen Submit Anda</a>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <input type="text" readonly class="form-control" name="tanggal_submit" value="{{ $check_code->tanggal_submit }}">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Revision</td>
+                                            <td>
+                                                @if($check_code->dokumen_revision)
+                                                    <a target="__blank" class="btn btn-primary" href="{{ asset('assets/storage/files/publikasi/revision/'.$check_code->dokumen_revision) }}">Lihat Dokumen Revision Anda</a>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <input type="text" readonly class="form-control" name="tanggal_revision" value="{{ $check_code->tanggal_revision }}">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Accepted</td>
+                                            <td>
+                                                @if($check_code->dokumen_accepted)
+                                                    <a target="__blank" class="btn btn-primary" href="{{ asset('assets/storage/files/publikasi/accepted/'.$check_code->dokumen_accepted) }}">Lihat Dokumen Accepted Anda</a>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <input type="text" readonly class="form-control" name="tanggal_accepted" value="{{ $check_code->tanggal_accepted }}">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Publish</td>
+                                            <td>
+                                                @if($check_code->dokumen_publish)
+                                                    <a target="__blank" class="btn btn-primary" href="{{ asset('assets/storage/files/publikasi/publish/'.$check_code->dokumen_publish) }}">Lihat Dokumen Publish Anda</a>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <input type="text" readonly class="form-control" name="tanggal_publish" value="{{ $check_code->tanggal_publish }}">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Rejected</td>
+                                            <td>
+                                                @if($check_code->dokumen_rejected)
+                                                    <a target="__blank" class="btn btn-primary" href="{{ asset('assets/storage/files/publikasi/rejected/'.$check_code->dokumen_rejected) }}">Lihat Dokumen Rejected Anda</a>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <input type="text" readonly class="form-control" name="tanggal_rejected" value="{{ $check_code->tanggal_rejected }}">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>

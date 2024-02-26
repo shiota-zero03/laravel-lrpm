@@ -42,7 +42,7 @@ class ProposalController extends Controller
     {
         $check_code = Submission::where('submission_code', $request->submission_code)->first();
         $namafile = time().'_'.$request->file('upload_dokumen_template')->getClientOriginalName();
-        $request->file('upload_dokumen_template')->move(public_path().'assets/storage/files/dokumen-proposal/', $namafile);
+        $request->file('upload_dokumen_template')->move(public_path().'/assets/storage/files/dokumen-proposal/', $namafile);
         $data = [
             'proposal_usulan' => $namafile,
         ];

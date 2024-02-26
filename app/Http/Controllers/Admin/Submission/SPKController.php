@@ -82,7 +82,7 @@ class SPKController extends Controller
             ]);
 
             $namafile = time().'_'.$request->file('file_upload')->getClientOriginalName();
-            $request->file('file_upload')->move(public_path().'assets/storage/files/spk-upload/', $namafile);
+            $request->file('file_upload')->move(public_path().'/assets/storage/files/spk-upload/', $namafile);
 
             $update = $check_code->update([
                 'status_spk' => 'Approved',
@@ -98,7 +98,7 @@ class SPKController extends Controller
     {
         $check_code = Submission::where('submission_code', $request->submission_code)->first();
         $namafile = time().'_'.$request->file('spk')->getClientOriginalName();
-        $request->file('spk')->move('assets/storage/files/spk-download/', $namafile);
+        $request->file('spk')->move(public_path().'/assets/storage/files/spk-download/', $namafile);
         \App\Models\Notification::create([
             'id_jenis' => $check_code->id,
             'jenis_notifikasi' => 'Proposal',

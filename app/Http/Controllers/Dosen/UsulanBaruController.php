@@ -131,7 +131,7 @@ class UsulanBaruController extends Controller
                 $cek = $data;
             } elseif($request->fase == 'upload-dokumen'){
                 $namafile = time().'_'.$request->file('dokumen_usulan')->getClientOriginalName();
-                $request->file('dokumen_usulan')->move(public_path().'assets/storage/files/dokumen-usulan/', $namafile);
+                $request->file('dokumen_usulan')->move(public_path().'/assets/storage/files/dokumen-usulan/', $namafile);
                 $data = [
                     'dokumen_usulan' => $namafile,
                     'status_usulan' => $check_code->status_usulan ? $check_code->status_usulan : 'Draft'
@@ -214,6 +214,7 @@ class UsulanBaruController extends Controller
                                                 ($check_code->status_usulan == 'Returned by Prodi' ? 'Pending by Prodi' : '')
                                             ),
                         'status_akhir' => 'Pending',
+                        'dokumen_tambahan_usulan' => null,
                         'waktu_usulan' => (( $check_code->waktu_usulan == null || !$check_code->waktu_usulan ) ? now() : $check_code->waktu_usulan),
                         'alasan_usulan_ditolak' => null,
                     ];

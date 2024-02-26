@@ -44,7 +44,7 @@ class SPKController extends Controller
         $spk = $check_code->spk_upload;
         if($request->file('spk')){
             $spk = time().'_'.$request->file('spk')->getClientOriginalName();
-            $request->file('spk')->move(public_path().'assets/storage/files/spk-upload/', $spk);
+            $request->file('spk')->move(public_path().'/assets/storage/files/spk-upload/', $spk);
         }
         $data = [
             'spk_upload' =>  $spk

@@ -44,7 +44,7 @@ class MonevController extends Controller
         if(now() < $check_code->waktu_sidang) return back()->with('error', 'Sidang belum dimulai');
 
         $laporanAkhir = time().'_'.$request->file('penilaian')->getClientOriginalName();
-        $request->file('penilaian')->move(public_path().'assets/storage/files/form-penilaian/', $laporanAkhir);
+        $request->file('penilaian')->move(public_path().'/assets/storage/files/form-penilaian/', $laporanAkhir);
 
         $data = [
             'status_monev' => 'Waiting for Validation',

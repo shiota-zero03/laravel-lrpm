@@ -44,7 +44,7 @@ class LaporanAkhirController extends Controller
         $laporanAkhir = $check_code->laporan_akhir;
         if($request->file('laporan_akhir')){
             $laporanAkhir = time().'_'.$request->file('laporan_akhir')->getClientOriginalName();
-            $request->file('laporan_akhir')->move(public_path().'assets/storage/files/laporan-akhir/', $laporanAkhir);
+            $request->file('laporan_akhir')->move(public_path().'/assets/storage/files/laporan-akhir/', $laporanAkhir);
         }
         $data = [
             'laporan_akhir' => $laporanAkhir,

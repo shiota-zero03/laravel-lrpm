@@ -44,7 +44,7 @@ class ProposalController extends Controller
         if($request->file('dokumen_tambahan_usulan')){
             $file = $request->file('dokumen_tambahan_usulan');
             $namafile = time().'_'.$file->getClientOriginalName();
-            $file->move(public_path().'assets/storage/files/dokumen-submission/', $namafile);
+            $file->move(public_path().'/assets/storage/files/dokumen-submission/', $namafile);
         } else {
             $namafile = null;
         }
@@ -74,7 +74,7 @@ class ProposalController extends Controller
             ]);
 
             $update = $check_code->update([
-                'dokumen_tambahan_proposal' => $namafile,
+                'dokumen_tambahan_proposal' => $namafile ? $namafile : null,
                 'second_status' => 'Rejected',
                 'status_proposal' => 'Waiting for Validation',
                 'alasan_proposal_ditolak' => $request->alasan,
@@ -106,7 +106,7 @@ class ProposalController extends Controller
                 'status_progress' => 'revised'
             ]);
             $update = $check_code->update([
-                'dokumen_tambahan_proposal' => $namafile,
+                'dokumen_tambahan_proposal' => $namafile ? $namafile : null,
                 'second_status' => 'Returned',
                 'status_proposal' => 'Waiting for Validation',
                 'alasan_proposal_ditolak' => $request->alasan,
@@ -139,7 +139,7 @@ class ProposalController extends Controller
                 'status_progress' => 'success'
             ]);
             $update = $check_code->update([
-                'dokumen_tambahan_proposal' => $namafile,
+                'dokumen_tambahan_proposal' => $namafile ? $namafile : null,
                 'status_proposal' => 'Waiting for SPK',
             ]);
             if($update) return response()->json(['message' =>'Data berhasil disetujui'], 200);

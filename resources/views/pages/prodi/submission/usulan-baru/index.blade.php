@@ -52,6 +52,13 @@
                                                     Alasan ditolak: <b>{{ $usulan->alasan_usulan_ditolak }}</b>
                                                 </small>
                                             @elseif( $usulan->status_usulan == 'Approved' ) <small class="btn border-2 border-success py-1 px-4 fw-bold fst-italic">{{ $usulan->status_usulan }}</small>
+                                            @elseif( $usulan->status_usulan == 'Pending by Prodi' )
+                                                <small class="btn border-2 border-warning py-1 px-4 fw-bold fst-italic">{{ $usulan->status_usulan }}</small><br />
+                                                @if ( $usulan->dokumen_tambahan_usulan )
+                                                    <small>
+                                                        Dokumen tambahan dari admin : <b><a href="{{ asset('assets/storage/files/dokumen-submission/'.$usulan->dokumen_tambahan_usulan) }}" target="__blank">Lihat dokumen</a></b>
+                                                    </small>
+                                                @endif
                                             @else
                                                 <small class="btn border-2 border-warning py-1 px-4 fw-bold fst-italic">{{ $usulan->status_usulan }}</small> <br />
                                                 @if( $usulan->status_usulan == 'Returned by Admin' || $usulan->status_usulan == 'Returned by Prodi' )

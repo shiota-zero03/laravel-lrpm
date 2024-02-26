@@ -42,7 +42,7 @@ class UsulanBaruController extends Controller
         if($request->file('dokumen_tambahan_usulan')){
             $file = $request->file('dokumen_tambahan_usulan');
             $namafile = time().'_'.$file->getClientOriginalName();
-            $file->move(public_path().'assets/storage/files/dokumen-submission/', $namafile);
+            $file->move(public_path().'/assets/storage/files/dokumen-submission/', $namafile);
         } else {
             $namafile = null;
         }

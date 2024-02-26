@@ -63,27 +63,27 @@ class PublikasiController extends Controller
         ];
         if($request->file('dokumen_submit')){
             $submit = time().'_'.$request->file('dokumen_submit')->getClientOriginalName();
-            $request->file('dokumen_submit')->move(public_path().'assets/storage/files/publikasi/submit/', $submit);
+            $request->file('dokumen_submit')->move(public_path().'/assets/storage/files/publikasi/submit/', $submit);
             $data = array_merge($data, ['dokumen_submit' => $submit]);
         }
         if($request->file('dokumen_revision')){
             $submit = time().'_'.$request->file('dokumen_revision')->getClientOriginalName();
-            $request->file('dokumen_revision')->move(public_path().'assets/storage/files/publikasi/revision/', $submit);
+            $request->file('dokumen_revision')->move(public_path().'/assets/storage/files/publikasi/revision/', $submit);
             $data = array_merge($data, ['dokumen_revision' => $submit]);
         }
         if($request->file('dokumen_accepted')){
             $submit = time().'_'.$request->file('dokumen_accepted')->getClientOriginalName();
-            $request->file('dokumen_accepted')->move(public_path().'assets/storage/files/publikasi/accepted/', $submit);
+            $request->file('dokumen_accepted')->move(public_path().'/assets/storage/files/publikasi/accepted/', $submit);
             $data = array_merge($data, ['dokumen_accepted' => $submit]);
         }
         if($request->file('dokumen_publish')){
             $submit = time().'_'.$request->file('dokumen_publish')->getClientOriginalName();
-            $request->file('dokumen_publish')->move(public_path().'assets/storage/files/publikasi/publish/', $submit);
+            $request->file('dokumen_publish')->move(public_path().'/assets/storage/files/publikasi/publish/', $submit);
             $data = array_merge($data, ['dokumen_publish' => $submit]);
         }
         if($request->file('dokumen_rejected')){
             $submit = time().'_'.$request->file('dokumen_rejected')->getClientOriginalName();
-            $request->file('dokumen_rejected')->move(public_path().'assets/storage/files/publikasi/rejected/', $submit);
+            $request->file('dokumen_rejected')->move(public_path().'/assets/storage/files/publikasi/rejected/', $submit);
             $data = array_merge($data, ['dokumen_rejected' => $submit]);
         }
 

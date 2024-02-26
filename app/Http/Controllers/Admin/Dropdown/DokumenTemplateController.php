@@ -97,7 +97,7 @@ class DokumenTemplateController extends Controller
     public function __uploadDokumen($file)
     {
         $namafile = time().'_'.$file->getClientOriginalName();
-        $file->move(public_path().'assets/storage/files/dokumen-template/', $namafile);
+        $file->move(public_path().'/assets/storage/files/dokumen-template/', $namafile);
         return $namafile;
     }
 }

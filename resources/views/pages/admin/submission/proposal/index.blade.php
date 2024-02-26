@@ -66,7 +66,12 @@
                                                 @else
                                                     <small>
                                                         Alasan @if( $usulan->second_status == 'Rejected' ) ditolak @else dikembalikan @endif: <b>{{ $usulan->alasan_proposal_ditolak }}</b>
-                                                    </small>
+                                                    </small><br />
+                                                    @if ( $usulan->dokumen_tambahan_proposal )
+                                                        <small>
+                                                            Dokumen tambahan dari reviewer : <b><a href="{{ asset('assets/storage/files/dokumen-submission/'.$usulan->dokumen_tambahan_proposal) }}" target="__blank">Lihat dokumen</a></b>
+                                                        </small>
+                                                    @endif
                                                 @endif
                                             @endif
                                         </td>

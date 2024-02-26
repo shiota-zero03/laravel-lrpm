@@ -45,14 +45,24 @@
                                                 <small class="btn border-2 border-danger py-1 px-4 fw-bold fst-italic">{{ $usulan->status_proposal }}</small> <br />
                                                 <small>
                                                     Alasan ditolak: <b>{{ $usulan->alasan_proposal_ditolak }}</b>
-                                                </small>
+                                                </small><br />
+                                                @if ( $usulan->dokumen_tambahan_proposal )
+                                                    <small>
+                                                        Dokumen tambahan dari reviewer : <b><a href="{{ asset('assets/storage/files/dokumen-submission/'.$usulan->dokumen_tambahan_proposal) }}" target="__blank">Lihat dokumen</a></b>
+                                                    </small>
+                                                @endif
                                             @elseif( $usulan->status_proposal == 'Approved' ) <small class="btn border-2 border-success py-1 px-4 fw-bold fst-italic">{{ $usulan->status_proposal }}</small>
                                             @else
                                                 <small class="btn border-2 border-warning py-1 px-4 fw-bold fst-italic">{{ $usulan->status_proposal }}</small> <br />
                                                 @if( $usulan->status_proposal == 'Returned by Admin' || $usulan->status_proposal == 'Returned by Reviewer' )
                                                     <small>
                                                         Alasan dikembalikan: <b>{{ $usulan->alasan_proposal_ditolak }}</b>
-                                                    </small>
+                                                    </small><br />
+                                                    @if ( $usulan->dokumen_tambahan_proposal )
+                                                        <small>
+                                                            Dokumen tambahan dari reviewer : <b><a href="{{ asset('assets/storage/files/dokumen-submission/'.$usulan->dokumen_tambahan_proposal) }}" target="__blank">Lihat dokumen</a></b>
+                                                        </small>
+                                                    @endif
                                                 @endif
                                             @endif
                                         </td>

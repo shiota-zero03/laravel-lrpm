@@ -157,7 +157,7 @@ class ProposalController extends Controller
     {
         $check_code = Submission::where('submission_code', $request->submission_code)->first();
         $namafile = time().'_'.$request->file('spk')->getClientOriginalName();
-        $request->file('spk')->move(public_path().'assets/storage/files/spk-download/', $namafile);
+        $request->file('spk')->move(public_path().'/assets/storage/files/spk-download/', $namafile);
         \App\Models\Notification::create([
             'id_jenis' => $check_code->id,
             'jenis_notifikasi' => 'Proposal',
