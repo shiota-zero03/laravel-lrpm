@@ -50,7 +50,7 @@ class LaporanFinalController extends Controller
             if(isset($_POST['store'])){
                 \App\Models\Notification::create([
                     'id_jenis' => $check_code->id,
-                    'jenis_notifikasi' => 'Laporan',
+                    'jenis_notifikasi' => 'Final',
                     'judul_notifikasi' => 'Informasi penerimaan laporan',
                     'text_notifikasi' => 'Laporan Final dengan nomor pengajuan '.$check_code->submission_code.' telah dinilai, menunggu verifikasi oleh admin',
                     'to_role' => 5,
@@ -59,7 +59,7 @@ class LaporanFinalController extends Controller
                 ]);
                 \App\Models\Notification::create([
                     'id_jenis' => $check_code->id,
-                    'jenis_notifikasi' => 'Laporan',
+                    'jenis_notifikasi' => 'Final',
                     'judul_notifikasi' => 'Informasi penerimaan laporan',
                     'text_notifikasi' => 'Laporan Final dengan nomor pengajuan '.$check_code->submission_code.' telah dinilai, menunggu verifikasi oleh admin',
                     'to_role' => 1,
@@ -74,7 +74,7 @@ class LaporanFinalController extends Controller
             } elseif(isset($_POST['update'])){
                 \App\Models\Notification::create([
                     'id_jenis' => $check_code->id,
-                    'jenis_notifikasi' => 'Laporan',
+                    'jenis_notifikasi' => 'Final',
                     'judul_notifikasi' => 'Informasi penerimaan laporan',
                     'text_notifikasi' => 'Laporan Final dengan nomor pengajuan '.$check_code->submission_code.' telah dinilai kembali, menunggu verifikasi oleh admin',
                     'to_role' => 1,
@@ -148,7 +148,7 @@ class LaporanFinalController extends Controller
             if(isset($_POST['store'])){
                 \App\Models\Notification::create([
                     'id_jenis' => $check_code->id,
-                    'jenis_notifikasi' => 'Laporan',
+                    'jenis_notifikasi' => 'Final',
                     'judul_notifikasi' => 'Informasi penerimaan laporan',
                     'text_notifikasi' => 'Laporan Final dengan nomor pengajuan '.$check_code->submission_code.' telah dinilai, menunggu verifikasi oleh admin',
                     'to_role' => 5,
@@ -157,7 +157,7 @@ class LaporanFinalController extends Controller
                 ]);
                 \App\Models\Notification::create([
                     'id_jenis' => $check_code->id,
-                    'jenis_notifikasi' => 'Laporan',
+                    'jenis_notifikasi' => 'Final',
                     'judul_notifikasi' => 'Informasi penerimaan laporan',
                     'text_notifikasi' => 'Laporan Final dengan nomor pengajuan '.$check_code->submission_code.' telah dinilai, menunggu verifikasi oleh admin',
                     'to_role' => 1,
@@ -172,7 +172,7 @@ class LaporanFinalController extends Controller
             } elseif(isset($_POST['update'])){
                 \App\Models\Notification::create([
                     'id_jenis' => $check_code->id,
-                    'jenis_notifikasi' => 'Laporan',
+                    'jenis_notifikasi' => 'Final',
                     'judul_notifikasi' => 'Informasi penerimaan laporan',
                     'text_notifikasi' => 'Laporan Final dengan nomor pengajuan '.$check_code->submission_code.' telah dinilai kembali, menunggu verifikasi oleh admin',
                     'to_role' => 1,

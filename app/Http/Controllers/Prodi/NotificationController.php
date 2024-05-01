@@ -10,7 +10,7 @@ use App\Models\Notification;
 class NotificationController extends Controller
 {
     public function read_all_notification (Request $request){
-        return Notification::where('to_role', 3)->where('to_id', auth()->user()->prodi)->update(['read_status' => 'read']);
+        return 0;
     }
     public function read_notification (Request $request)
     {

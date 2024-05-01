@@ -54,7 +54,7 @@ class LaporanFinalController extends Controller
         if($request->aksi == 'Revised') {
             \App\Models\Notification::create([
                 'id_jenis' => $check_code->id,
-                'jenis_notifikasi' => 'Laporan',
+                'jenis_notifikasi' => 'Final',
                 'judul_notifikasi' => 'Informasi pengembalian laporan Final',
                 'text_notifikasi' => 'Laporan Final dengan nomor pengajuan '.$check_code->submission_code.' telah dikembalikan',
                 'to_role' => 5,
@@ -77,7 +77,7 @@ class LaporanFinalController extends Controller
             $user = User::find($check_code->id_pengaju);
             \App\Models\Notification::create([
                 'id_jenis' => $check_code->id,
-                'jenis_notifikasi' => 'Laporan',
+                'jenis_notifikasi' => 'Final',
                 'judul_notifikasi' => 'Informasi penerimaan laporan Final',
                 'text_notifikasi' => 'Laporan Final dengan nomor pengajuan '.$check_code->submission_code.' telah dilanjutkan ke bagian reviewer',
                 'to_role' => 5,
@@ -86,7 +86,7 @@ class LaporanFinalController extends Controller
             ]);
             \App\Models\Notification::create([
                 'id_jenis' => $check_code->id,
-                'jenis_notifikasi' => 'Laporan',
+                'jenis_notifikasi' => 'Final',
                 'judul_notifikasi' => 'Informasi penerimaan laporan Final',
                 'text_notifikasi' => 'Laporan Final dengan nomor pengajuan '.$check_code->submission_code.' telah dilanjutkan ke bagian reviewer',
                 'to_role' => 2,
@@ -108,7 +108,7 @@ class LaporanFinalController extends Controller
             $user = User::find($check_code->id_pengaju);
             \App\Models\Notification::create([
                 'id_jenis' => $check_code->id,
-                'jenis_notifikasi' => 'Laporan',
+                'jenis_notifikasi' => 'Final',
                 'judul_notifikasi' => 'Informasi penerimaan laporan Final',
                 'text_notifikasi' => 'Laporan Final dengan nomor pengajuan '.$check_code->submission_code.' dikembalikan oleh admin ke reviewer',
                 'to_role' => 2,
@@ -133,7 +133,7 @@ class LaporanFinalController extends Controller
 
             \App\Models\Notification::create([
                 'id_jenis' => $check_code->id,
-                'jenis_notifikasi' => 'Laporan',
+                'jenis_notifikasi' => 'Final',
                 'judul_notifikasi' => 'Informasi laporan final telah dinilai oleh reviewer',
                 'text_notifikasi' => 'Laporan Final telah dinilai oleh reviewer',
                 'to_role' => 5,

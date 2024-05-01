@@ -104,7 +104,7 @@
                 })
             }
         } else if(event === 'prev') {
-            document.location.href="?page=2" 
+            document.location.href="?page=2"
         } else if(event === 'draft') {
             document.location.href="{{ route('dosen.usulan-baru.index', $type) }}"
         }

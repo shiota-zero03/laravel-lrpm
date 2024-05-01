@@ -244,20 +244,32 @@
             <label for="nama_jurnal" class="fw-bold mb-1">Judul Publikasi</label>
             <input type="text" readonly value="{{ $check_code->judul_publikasi }}" class="w-100 form-control" readonly>
         </div>
-        <div class="mb-2 form-group col-md-6">
+        <div class="mb-2 form-group col-md-4">
             <label for="nama_jurnal" class="fw-bold mb-1">Nama Jurnal</label>
             <input type="text" readonly value="{{ $check_code->nama_jurnal }}" class="w-100 form-control" readonly>
         </div>
-        <div class="mb-2 form-group col-md-6">
+        <div class="mb-2 form-group col-md-4">
             <label for="link_jurnal" class="fw-bold mb-1">Link Jurnal</label>
             <input type="text" readonly value="{{ $check_code->link_jurnal }}" class="w-100 form-control" readonly>
+        </div>
+        <div class="col-md-4 col-12 mb-2">
+            <label for="download-usulan" class="fw-bold mb-1">Download Artikel :</label><br />
+            @if(!$check_code->draft_artikel)
+                <a class="btn btn-secondary w-100" id="download-usulan">
+                    <small><em>Belum ada artikel yang diupload</em></small>
+                </a>
+            @else
+                <a target="__blank" href="{{ asset('assets/storage/files/publikasi/draft-artikel/'.$check_code->draft_artikel) }}" class="btn btn-success w-100" id="download-usulan">
+                    <i class="bi bi-cloud-arrow-down-fill me-2"></i>Download Artikel
+                </a>
+            @endif
         </div>
         <div class="col-12">
             <table class="table table-bordered table-striped">
                 <thead>
                     <tr>
                         <th>Status</th>
-                        <th>Dokumen View</th>
+                        <th>Lihat Bukti Status <em>(Screenshot)</em></th>
                         <th>Tanggal</th>
                     </tr>
                 </thead>
@@ -266,7 +278,7 @@
                         <td>Submit</td>
                         <td>
                             @if($check_code->dokumen_submit)
-                                <a target="__blank" class="btn btn-primary" href="{{ asset('assets/storage/files/publikasi/submit/'.$check_code->dokumen_submit) }}">Lihat Dokumen Submit Anda</a>
+                                <a target="__blank" class="btn btn-primary" href="{{ asset('assets/storage/files/publikasi/submit/'.$check_code->dokumen_submit) }}">Lihat Bukti Submit Anda</a>
                             @endif
                         </td>
                         <td>
@@ -277,7 +289,7 @@
                         <td>Revision</td>
                         <td>
                             @if($check_code->dokumen_revision)
-                                <a target="__blank" class="btn btn-primary" href="{{ asset('assets/storage/files/publikasi/revision/'.$check_code->dokumen_revision) }}">Lihat Dokumen Revision Anda</a>
+                                <a target="__blank" class="btn btn-primary" href="{{ asset('assets/storage/files/publikasi/revision/'.$check_code->dokumen_revision) }}">Lihat Bukti Revision Anda</a>
                             @endif
                         </td>
                         <td>
@@ -288,7 +300,7 @@
                         <td>Accepted</td>
                         <td>
                             @if($check_code->dokumen_accepted)
-                                <a target="__blank" class="btn btn-primary" href="{{ asset('assets/storage/files/publikasi/accepted/'.$check_code->dokumen_accepted) }}">Lihat Dokumen Accepted Anda</a>
+                                <a target="__blank" class="btn btn-primary" href="{{ asset('assets/storage/files/publikasi/accepted/'.$check_code->dokumen_accepted) }}">Lihat Bukti Accepted Anda</a>
                             @endif
                         </td>
                         <td>
@@ -299,7 +311,7 @@
                         <td>Publish</td>
                         <td>
                             @if($check_code->dokumen_publish)
-                                <a target="__blank" class="btn btn-primary" href="{{ asset('assets/storage/files/publikasi/publish/'.$check_code->dokumen_publish) }}">Lihat Dokumen Publish Anda</a>
+                                <a target="__blank" class="btn btn-primary" href="{{ asset('assets/storage/files/publikasi/publish/'.$check_code->dokumen_publish) }}">Lihat Bukti Publish Anda</a>
                             @endif
                         </td>
                         <td>
@@ -310,7 +322,7 @@
                         <td>Rejected</td>
                         <td>
                             @if($check_code->dokumen_rejected)
-                                <a target="__blank" class="btn btn-primary" href="{{ asset('assets/storage/files/publikasi/rejected/'.$check_code->dokumen_rejected) }}">Lihat Dokumen Rejected Anda</a>
+                                <a target="__blank" class="btn btn-primary" href="{{ asset('assets/storage/files/publikasi/rejected/'.$check_code->dokumen_rejected) }}">Lihat Bukti Rejected Anda</a>
                             @endif
                         </td>
                         <td>

@@ -10,7 +10,8 @@ use App\Models\Notification;
 class NotificationController extends Controller
 {
     public function read_all_notification (Request $request){
-        return Notification::where('to_role', 1)->update(['read_status' => 'read']);
+        // return Notification::where('to_role', 1)->update(['read_status' => 'read']);
+        return 0;
     }
     public function read_notification (Request $request)
     {
@@ -28,9 +29,18 @@ class NotificationController extends Controller
         } elseif ($jenis == 'Proposal') {
             $sub = \App\Models\Submission::find($getById->id_jenis);
             return redirect()->to(route('admin.proposal.show', ['type' => $sub->tipe_submission, 'submission_code' => $sub->submission_code]));
+        } elseif ($jenis == 'SPK') {
+            $sub = \App\Models\Submission::find($getById->id_jenis);
+            return redirect()->to(route('admin.spk.show', ['type' => $sub->tipe_submission, 'submission_code' => $sub->submission_code]));
         } elseif ($jenis == 'Laporan') {
             $sub = \App\Models\Submission::find($getById->id_jenis);
             return redirect()->to(route('admin.laporan-akhir.show', ['type' => $sub->tipe_submission, 'submission_code' => $sub->submission_code]));
+        } elseif ($jenis == 'Monev') {
+            $sub = \App\Models\Submission::find($getById->id_jenis);
+            return redirect()->to(route('admin.monev.show', ['type' => $sub->tipe_submission, 'submission_code' => $sub->submission_code]));
+        } elseif ($jenis == 'Final') {
+            $sub = \App\Models\Submission::find($getById->id_jenis);
+            return redirect()->to(route('admin.laporan-final.show', ['type' => $sub->tipe_submission, 'submission_code' => $sub->submission_code]));
         } elseif ($jenis == 'Publikasi') {
             $sub = \App\Models\Submission::find($getById->id_jenis);
             return redirect()->to(route('admin.publikasi.show', ['type' => $sub->tipe_submission, 'submission_code' => $sub->submission_code]));

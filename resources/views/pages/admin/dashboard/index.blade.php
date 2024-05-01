@@ -68,8 +68,9 @@
                             <input type="text" id="daterange" name="daterange" value="" class="form-control border border-dark" style="cursor: pointer" />
                         </div>
                     </div>
-                    <div>
-                        <a onclick="exportExcel()" class="btn btn-success text-white fw-bold"><i class="bi bi-file-earmark-excel-fill me-2"></i> Export ke Excel</a>
+                    <div class="d-md-flex justify-content-between mt-3">
+                        <a onclick="exportExcel()" class="btn btn-success mb-3 text-white fw-bold"><i class="bi bi-file-earmark-excel-fill me-2"></i> Export ke Excel</a>
+                        <a onclick="exportUsulanToExcel()" class="btn btn-success mb-3 text-white fw-bold"><i class="bi bi-file-earmark-excel-fill me-2"></i> Export database usulan ke Excel</a>
                     </div>
                     <div class="row mt-2">
                         <div class="col-md-6 col-12">
@@ -498,6 +499,12 @@
         var start = $('#start').val();
         var end = $('#end').val();
         document.location.href='/admin/export?from='+start+"&to="+end;
+    }
+    function exportUsulanToExcel()
+    {
+        var start = $('#start').val();
+        var end = $('#end').val();
+        document.location.href='/admin/database-usulan/export?from='+start+"&to="+end;
     }
 </script>
 @endpush

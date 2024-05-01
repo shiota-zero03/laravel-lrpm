@@ -100,6 +100,11 @@ $('#simpan_template').on('click', function(){
                 if(errorResponse['nama_item']) $('#error_nama_item').html(errorResponse['nama_item'][0]);
                 if(errorResponse['harga']) $('#error_harga_satuan').html(errorResponse['harga'][0]);
                 if(errorResponse['volume']) $('#error_volume').html(errorResponse['volume'][0]);
+            } else if (error.status === 403) {
+                Swal.fire({
+                    text: error.responseJSON.message,
+                    icon: 'error',
+                })
             }
             $('#loading-submit-rab').addClass('d-none')
         }

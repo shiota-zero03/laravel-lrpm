@@ -277,6 +277,7 @@
                         @if($check_code->status_monev == 'Waiting for Validation')
                             <div class="d-md-flex">
                                 <button type="button" onclick="action('setujui')" class="btn btn-primary me-2 mb-2 text-white"><small>Kirim Komentar ke Pengusul</small></button>
+                                <button type="button" onclick="action('to_reviewer')" class="btn btn-warning me-2 mb-2 text-white"><small>Kembalikan ke Reviewer</small></button>
                             </div>
                         @endif
                     </div>

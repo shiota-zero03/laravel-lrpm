@@ -104,22 +104,22 @@ class MonevController extends Controller
             $user = User::find($check_code->id_pengaju);
             \App\Models\Notification::create([
                 'id_jenis' => $check_code->id,
-                'jenis_notifikasi' => 'Laporan',
-                'judul_notifikasi' => 'Informasi penerimaan laporan akhir',
-                'text_notifikasi' => 'Laporan akhir dengan nomor pengajuan '.$check_code->submission_code.' dikembalikan oleh admin ke reviewer',
+                'jenis_notifikasi' => 'Monev',
+                'judul_notifikasi' => 'Informasi pengembalian monev',
+                'text_notifikasi' => 'Monev dengan nomor pengajuan '.$check_code->submission_code.' dikembalikan oleh admin ke reviewer',
                 'to_role' => 2,
                 'to_id' => $check_code->review_laporan_akhir_by,
                 'read_status' => 'unread',
             ]);
             \App\Models\TimelineProgress::create([
                 'id_submission' => $check_code->id,
-                'judul_progress' => 'Laporan akhir dikembalikan ke reviewer',
-                'text_progress' => 'Laporan akhir dikembalikan ke bagian reviewer',
+                'judul_progress' => 'Monev dikembalikan ke reviewer',
+                'text_progress' => 'Monev dikembalikan ke bagian reviewer',
                 'status_progress' => 'revised'
             ]);
             $update = $check_code->update([
-                'status_laporan_akhir' => 'Returned to Reviewer',
-                'alasan_laporan_akhir_ditolak' => $request->alasan,
+                'status_monev' => 'Returned to Reviewer',
+                'alasan_monev_ditolak' => $request->alasan,
             ]);
             if($update) return response()->json(['message' =>'Data berhasil dikembalikan'], 200);
             return response()->json(['message' => 'server error'], 500);

@@ -446,6 +446,16 @@ class UsulanBaruController extends Controller
     {
         $this->__rabRules($request);
         $check_code = Submission::where('submission_code', $request->submission_code)->first();
+        $check_skema = Schema::find($check_code->skema);
+        if($request->type == 'penelitian'){
+            $maxdana = $check_skema->max_dana_penelitian;
+        } else {
+            $maxdana = $check_skema->max_dana_pkm;
+        };
+        $rabSub = RabSubmission::where('id_submission', $check_code->id)->sum('total');
+
+        if( ($request->total + $rabSub) > $maxdana ) return response()->json(['message' => 'Dana maksimal yang dapat anda input adalah sebesar Rp'.number_format($maxdana, 2, ',', '.')], 403);
+
         $rab = Rab::find($request->nama_item);
         if(!$rab) $nama_item = $request->nama_item;
         else $nama_item = $rab->nama_item;

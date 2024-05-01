@@ -11,6 +11,8 @@ class Schema extends Model
     protected $table = 'schemas';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'nama_skema'
+        'nama_skema',
+        'max_dana_pkm',
+        'max_dana_penelitian'
     ];
 }

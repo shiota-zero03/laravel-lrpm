@@ -53,6 +53,7 @@ Route::middleware('auth')->group(function(){
 			Route::get('/', 'index')->name('beranda.index');
 			Route::get('/dashboard', 'dashboard')->name('dashboard.index');
             Route::get('/export', 'export')->name('dashboard.export');
+            Route::get('/database-usulan/export', 'exportDatabase')->name('dashboard.export.database');
 		});
 
 		Route::prefix('/dropdown')->name('dropdown.')->group(function(){

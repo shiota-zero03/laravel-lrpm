@@ -58,7 +58,7 @@ class LaporanFinalController extends Controller
         if($check_code->status_laporan_final == 'Returned by Admin'){
             \App\Models\Notification::create([
                 'id_jenis' => $check_code->id,
-                'jenis_notifikasi' => 'Laporan',
+                'jenis_notifikasi' => 'Final',
                 'judul_notifikasi' => 'Informasi pengembalian laporan final',
                 'text_notifikasi' => 'Laporan final dengan nomor pengajuan '.$check_code->submission_code.' telah dikirim kembali menunggu untuk dikonfirmasi',
                 'to_role' => 1,
@@ -73,7 +73,7 @@ class LaporanFinalController extends Controller
         } elseif($check_code->status_laporan_final == 'Returned by Reviewer'){
             \App\Models\Notification::create([
                 'id_jenis' => $check_code->id,
-                'jenis_notifikasi' => 'Laporan',
+                'jenis_notifikasi' => 'Final',
                 'judul_notifikasi' => 'Informasi pengembalian laporan final',
                 'text_notifikasi' => 'Laporan final dengan nomor pengajuan '.$check_code->submission_code.' telah dikirim kembali menunggu untuk dikonfirmasi',
                 'to_role' => 1,
@@ -88,7 +88,7 @@ class LaporanFinalController extends Controller
         } elseif($check_code->status_laporan_final == 'Pending by Dosen'){
             \App\Models\Notification::create([
                 'id_jenis' => $check_code->id,
-                'jenis_notifikasi' => 'Laporan',
+                'jenis_notifikasi' => 'Final',
                 'judul_notifikasi' => 'Informasi pengajuan laporan final',
                 'text_notifikasi' => 'Laporan final dengan nomor pengajuan '.$check_code->submission_code.' telah diajukan, menunggu untuk dikonfirmasi',
                 'to_role' => 1,

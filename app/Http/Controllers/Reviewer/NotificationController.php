@@ -10,7 +10,7 @@ use App\Models\Notification;
 class NotificationController extends Controller
 {
     public function read_all_notification (Request $request){
-        return Notification::where('to_role', 2)->where('to_id', auth()->user()->id)->update(['read_status' => 'read']);
+        return 0;
     }
     public function read_notification (Request $request)
     {
@@ -26,6 +26,12 @@ class NotificationController extends Controller
         } elseif ($jenis == 'Laporan') {
             $sub = \App\Models\Submission::find($getById->id_jenis);
             return redirect()->to(route('reviewer.laporan-akhir.show', ['type' => $sub->tipe_submission, 'submission_code' => $sub->submission_code]));
+        } elseif ($jenis == 'Monev') {
+            $sub = \App\Models\Submission::find($getById->id_jenis);
+            return redirect()->to(route('reviewer.monev.show', ['type' => $sub->tipe_submission, 'submission_code' => $sub->submission_code]));
+        } elseif ($jenis == 'Final') {
+            $sub = \App\Models\Submission::find($getById->id_jenis);
+            return redirect()->to(route('reviewer.laporan-final.show', ['type' => $sub->tipe_submission, 'submission_code' => $sub->submission_code]));
         }
     }
 }

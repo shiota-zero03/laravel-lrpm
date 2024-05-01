@@ -233,4 +233,16 @@ class DashboardController extends Controller
         ];
         return $data;
     }
+    public function exportDatabase (Request $request)
+    {
+        $from = $request->from ? $request->from : date('Y-m-d');
+        $to = $request->to ? $request->to : date('Y-m-d');
+
+        if($request->from && $request->to){
+            $submission = Submission::whereBetween('status_usulan', [$from.' 00:00:00', $to.' 23:59:59'])->whereNot('status_akhir', null)->get();
+        } else {
+            $submission = Submission::whereNot('status_usulan', 'Draft')->whereNot('status_akhir', null)->get();
+        }
+        return view('pages.public.export-database', compact(['submission']));
+    }
 }

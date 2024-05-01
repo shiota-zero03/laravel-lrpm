@@ -87,8 +87,33 @@
                                         <label for="penilaian" class="fw-bold mb-1">Upload Penilaian <span class="text-danger">*</span> :</label><br />
                                         <input accept=".doc, .docx, .ppt" type="file" id="penilaian" name="penilaian" class="form-control" required>
                                     </div>
+                                @elseif($check_code->status_monev == 'Returned to Reviewer')
+                                    <div class="col-md-4 col-12 mb-2">
+                                        <label class="fw-bold mb-1">Template Form Penilaian :</label><br />
+                                        @php
+                                            $fti = ['FTI', 'FAKULTAS TEKNIK DAN INFORMATIKA', 'FAKULTAS TEKNIK DAN INFORMATIKA (FTI)'];
+                                            $fbis = ['FBIS', 'FAKULTAS BISNIS DAN ILMU SOSIAL', 'FAKULTAS BISNIS DAN ILMU SOSIAL (FBIS)'];
+                                            $find_user = \App\Models\User::find($check_code->id_pengaju);
+                                            $fakultas_user = \App\Models\Faculty::find($find_user->fakultas);
+                                            if( in_array(strtoupper($fakultas_user->nama_fakultas), $fti) ) $form = \App\Models\TemplateDocument::where('nama_template', 'Form Penilaian FTI')->first();
+                                            elseif( in_array(strtoupper($fakultas_user->nama_fakultas), $fbis) ) $form = \App\Models\TemplateDocument::where('nama_template', 'Form Penilaian FBIS')->first();
+                                        @endphp
+                                        @if(!$form->dokumen_template || $form->dokumen_template == null)
+                                            <a class="btn btn-danger w-100">
+                                                <small><em>Belum ada ppt monev</em></small>
+                                            </a>
+                                        @else
+                                            <a href="{{ asset('assets/storage/files/dokumen-template/'.$form->dokumen_template) }}" target="__blank" class="btn btn-warning text-white w-100">
+                                                <i class="bi bi-file-earmark-fill me-2"></i> Template {{ $form->nama_template }}
+                                            </a>
+                                        @endif
+                                    </div>
+                                    <div class="col-md-4 col-12 mb-2">
+                                        <label for="penilaian" class="fw-bold mb-1">Upload Penilaian <span class="text-danger">*</span> :</label><br />
+                                        <input accept=".doc, .docx, .ppt" type="file" id="penilaian" name="penilaian" class="form-control" required>
+                                    </div>
                                 @endif
-                                <div class="@if($check_code->status_monev == 'Waiting for Schedule') col-md-4 @else col-12 @endif col-12 mb-2">
+                                <div class="@if($check_code->status_monev == 'Waiting for Schedule' || $check_code->status_monev == 'Returned to Reviewer') col-md-4 @else col-12 @endif col-12 mb-2">
                                     <label for="download-usulan" class="fw-bold mb-1">Download Penilaian :</label><br />
                                     @if(!$check_code->dokumen_tambahan_monev)
                                         <a class="btn btn-secondary w-100" id="download-usulan">
@@ -96,16 +121,16 @@
                                         </a>
                                     @else
                                         <a href="{{ asset('assets/storage/files/form-penilaian/'.$check_code->dokumen_tambahan_monev) }}" class="btn btn-success w-100" id="download-usulan">
-                                            <i class="bi bi-cloud-arrow-down-fill me-2"></i>Download penilaian
+                                            <i class="bi bi-cloud-arrow-down-fill me-2"></i>@if($check_code->status_monev == 'Returned to Reviewer')Lihat penilaian sebelumnya @else Download penilaian @endif
                                         </a>
                                     @endif
                                 </div>
                                 <div class="col-12 mb-2">
                                     <label for="komentar" class="fw-bold">Komentar Reviewer :</label>
-                                    <textarea name="komentar" id="komentar" class="form-control border border-dark" required @if($check_code->status_monev !== 'Waiting for Schedule') readonly @endif rows="5">{{ $check_code->komentar_reviewer }}</textarea>
+                                    <textarea name="komentar" id="komentar" class="form-control border border-dark" required @if($check_code->status_monev !== 'Waiting for Schedule') @if($check_code->status_monev !== 'Returned to Reviewer') readonly @endif  @endif rows="5">{{ $check_code->komentar_reviewer }}</textarea>
                                 </div>
                             </div>
-                            @if($check_code->status_monev == 'Waiting for Schedule')
+                            @if($check_code->status_monev == 'Waiting for Schedule' || $check_code->status_monev == 'Returned to Reviewer')
                                 <div class="d-md-flex">
                                     <button class="btn btn-primary">Simpan</button>
                                 </div>

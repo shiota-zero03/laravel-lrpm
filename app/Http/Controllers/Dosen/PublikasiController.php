@@ -42,6 +42,9 @@ class PublikasiController extends Controller
                     return view('pages.dosen.publikasi.buat-proposal.fase-3', compact(['type', 'check_code']));
                 }
             }
+            if( $check_code->draft_artikel ) {
+                return view('pages.dosen.publikasi.buat-proposal.fase-3', compact(['type', 'check_code']));
+            }
             return redirect()->to(route('dosen.publikasi.update', ['type' => $request->type, 'submission_code' => $request->submission_code.'?page=2']))->with('error', 'Harap lengkapi form terlebih dahulu');
         }
         abort(404);
@@ -86,6 +89,11 @@ class PublikasiController extends Controller
             $request->file('dokumen_rejected')->move(public_path().'/assets/storage/files/publikasi/rejected/', $submit);
             $data = array_merge($data, ['dokumen_rejected' => $submit]);
         }
+        if($request->file('draft_artikel')){
+            $submit = time().'_'.$request->file('draft_artikel')->getClientOriginalName();
+            $request->file('draft_artikel')->move(public_path().'/assets/storage/files/publikasi/draft-artikel/', $submit);
+            $data = array_merge($data, ['draft_artikel' => $submit]);
+        }
 
         $update = Submission::find($check_code->id)->update($data);
         if($update) return back();
@@ -108,7 +116,7 @@ class PublikasiController extends Controller
                 'text_progress' => 'Diperbaiki oleh '.auth()->user()->name,
                 'status_progress' => 'success'
             ]);
-        } elseif($check_code->status_publikasi == 'Pending'){
+        } elseif($check_code->status_publikasi == 'Pending by Dosen'){
             \App\Models\Notification::create([
                 'id_jenis' => $check_code->id,
                 'jenis_notifikasi' => 'Publikasi',
